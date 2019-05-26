@@ -4,20 +4,22 @@ const db = require('../db/index.js')
 
 const app = express();
 
-var port = 3001;
+var port = 3004;
 
 app.use(express.static(__dirname + '/../public'));
 app.use(bodyParser.json());
 
 app.listen(port, () => {
-    console.log('Server is listening on port 3001')
+    console.log('Server is listening on port 3004')
 });
 
-
+app.get('/', () => {
+    console.log('GET request received at root');
+})
 
 // 1 day for Stock # 1
-app.get('/api/stocks/prices', (req, res) => {
-    db.getOneDayData((err, results) => {
+app.get('/api/stocks/:ticker/prices', (req, res) => {
+    db.getOneDayData(req.params.ticker, (err, results) => {
         if (err) {
             res.status(500);
             res.send(err);
