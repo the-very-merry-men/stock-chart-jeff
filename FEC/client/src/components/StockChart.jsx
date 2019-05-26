@@ -3,13 +3,70 @@ import LineChart from './LineChart.jsx';
 import styled from 'styled-components';
 
 //STYLING
-const ATag = styled.a`
+const OneDTag = styled.a`
    margin: 0px 12px;
 
    &:hover {
     color: #21CE99;
    }
+
+   border-bottom: ${props => props.type === '1D' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '1D' ? '#21CE99' : 'black'};
 `;
+const OneWTag = styled.a`
+   margin: 0px 12px;
+
+   &:hover {
+    color: #21CE99;
+   }
+
+   border-bottom: ${props => props.type === '1W' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '1W' ? '#21CE99' : 'black'};
+`;
+
+const OneMTag = styled.a`
+   margin: 0px 12px;
+
+   &:hover {
+    color: #21CE99;
+   }
+
+   border-bottom: ${props => props.type === '1M' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '1M' ? '#21CE99' : 'black'};
+`;
+const ThreeMTag = styled.a`
+   margin: 0px 12px;
+
+   &:hover {
+    color: #21CE99;
+   }
+
+   border-bottom: ${props => props.type === '3M' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '3M' ? '#21CE99' : 'black'};
+`;
+
+const OneYTag = styled.a`
+   margin: 0px 12px;
+
+   &:hover {
+    color: #21CE99;
+   }
+
+   border-bottom: ${props => props.type === '1Y' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '1Y' ? '#21CE99' : 'black'};
+`;
+const FiveYTag = styled.a`
+   margin: 0px 12px;
+
+   &:hover {
+    color: #21CE99;
+   }
+
+   border-bottom: ${props => props.type === '5Y' ? '#21CE99 1px solid' : 'none'};
+   color: ${props => props.type === '5Y' ? '#21CE99' : 'black'};
+`;
+
+
 
 const NavType = styled.nav`
    display: flex;
@@ -100,16 +157,15 @@ class StockChart extends React.Component {
 
     handleGraphTypeChange(event) {
         event.preventDefault();
-        console.log("you clicked", event.target.name);
         this.setState({
             type: event.target.name
         })
 
+
     }
 
     render() {
-        let color = this.props.market === 'Bull' ? '#f45531' : '#21CE99';
-        let hoverColor = this.state.typeHover ? 'black' : color;
+        const color = (this.props.market === 'Bull' ? '#f45531' : '#21CE99');
 
         return (
             <SectionWrapper className='stock-chart-container'>
@@ -128,12 +184,12 @@ class StockChart extends React.Component {
                     <LineChart />
                 </ChartBox>
             <NavType className='stock-type-nav'>
-                <ATag name="1D" onClick={this.handleGraphTypeChange}>1D</ATag>
-                <ATag name="1W" onClick={this.handleGraphTypeChange}>1W</ATag>
-                <ATag name="1M" onClick={this.handleGraphTypeChange}>1M</ATag>
-                <ATag name="3M" onClick={this.handleGraphTypeChange}>3M</ATag>
-                <ATag name="1Y" onClick={this.handleGraphTypeChange}>1Y</ATag>
-                <ATag name="5Y" onClick={this.handleGraphTypeChange}>5Y</ATag>
+                <OneDTag type={this.state.type} name="1D" onClick={this.handleGraphTypeChange}>1D</OneDTag>
+                <OneWTag type={this.state.type} name="1W" onClick={this.handleGraphTypeChange} >1W</OneWTag>
+                <OneMTag type={this.state.type} name="1M" onClick={this.handleGraphTypeChange} >1M</OneMTag>
+                <ThreeMTag type={this.state.type} name="3M" onClick={this.handleGraphTypeChange} >3M</ThreeMTag>
+                <OneYTag type={this.state.type} name="1Y" onClick={this.handleGraphTypeChange}>1Y</OneYTag>
+                <FiveYTag type={this.state.type} name="5Y" onClick={this.handleGraphTypeChange}>5Y</FiveYTag>
             </NavType>
             </SectionWrapper>
         )
