@@ -1,0 +1,3 @@
+FEC/node_modules/*
+FEC/public/bundle.js
+package-lock.json
