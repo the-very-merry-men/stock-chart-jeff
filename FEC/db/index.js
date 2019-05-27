@@ -14,7 +14,7 @@ const getOneDayWeekMonthData = (ticker, type, callback) => {
     } else if (type === '1M') {
         rows = 340;
     }
-    var query = `SELECT stock_price_for_thirty_minutes AS y FROM stock_info
+    var query = `SELECT stock_price_for_thirty_minutes AS price, stock_name AS name FROM stock_info
     INNER JOIN stock_price_history_one_month
     ON stock_price_history_one_month.stock_id = stock_info.id
     WHERE stock_info.stock_ticker = "${ticker}" LIMIT ${rows}`;
@@ -38,7 +38,7 @@ const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
     } else if (type === '5Y') {
         rows = 1,260;
     }
-    var query = `SELECT stock_price_for_one_day AS y, stock_name AS name FROM stock_info
+    var query = `SELECT stock_price_for_one_day AS price, stock_name AS name FROM stock_info
     INNER JOIN stock_price_history_five_years
     ON stock_price_history_five_years.stock_id = stock_info.id
     WHERE stock_info.stock_ticker = "${ticker}" LIMIT ${rows}`;
