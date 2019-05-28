@@ -1,4 +1,3 @@
-
 var mysql = require('mysql');
 var mysqlConfig = require('./config.js');
 
@@ -36,7 +35,7 @@ const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
         //need 85
         rows = 252;
     } else if (type === '5Y') {
-        rows = 1,260;
+        rows = 400;
     }
     var query = `SELECT stock_price_for_one_day AS price, stock_name AS name FROM stock_info
     INNER JOIN stock_price_history_five_years

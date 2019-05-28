@@ -145,51 +145,55 @@ class StockChart extends React.Component {
         super(props);
 
         this.state = {
-            typeHover: false,
-            color: '#f45531',
-            type: '1D',
-            currentPoint: {},
-            date: new Date(),
-            market: 'Bull'
+            currentPrice: 200.00,
+            closingPrice: 210.00,
+            amountDiff: 2.00,
+            percentDiff: 0.012,
         }
-        this.handleGraphTypeChange = this.handleGraphTypeChange.bind(this);
     }
 
-    handleGraphTypeChange(event) {
-        event.preventDefault();
+    componentDidMount() {
+        const random = (Math.random());
+        const currentPrice = this.props.stockData[this.props.stockData.length - 1];
+        const closing = random < 0.5 ? currentPrice + (Math.random() * 20) : currentPrice - (Math.random() * 5);
         this.setState({
-            type: event.target.name
+            currentPrice: currentPrice,
+            closingPrice: closing
         })
-
-
     }
-
     render() {
         const color = (this.props.market === 'Bull' ? '#f45531' : '#21CE99');
+        const currentVal = `$${this.state.currentPrice}`;
+        const priceDifference = this.state.closingPrice - this.state.currentPrice;
+        const pricePercentage = (priceDifference/this.state.closingPrice).toFixed(3);
+        const sign = priceDifference > 0 ? '+' : '-';
+        const differenceString = `${sign}$${priceDifference}   `;
+        const percentString = `${sign}(${pricePercentage})`
+
 
         return (
             <SectionWrapper className='stock-chart-container'>
                 <StockHeader>
-                    <StockName>Google</StockName>
+                    <StockName>{this.props.stockName}</StockName>
                 </StockHeader>
                 <PriceHeader>
-                    <Price>$2,000</Price>
+                    <Price>{currentVal}</Price>
                     <Change>
-                        <StockPriceChange>+$2.00</StockPriceChange >
-                        <StockPriceChange> (+0.001) </StockPriceChange>
+                        <StockPriceChange>{differenceString}</StockPriceChange >
+                        <StockPriceChange>{percentString}</StockPriceChange>
                     </Change >
                 </PriceHeader>
                 <Spacer></Spacer>
                 <ChartBox className="stock-chart" style={{position: 'relative', width: 676, height: 196}}>
-                    <LineChart />
+                    <LineChart stockData={this.props.stockData}/>
                 </ChartBox>
             <NavType className='stock-type-nav'>
-                <OneDTag type={this.state.type} name="1D" onClick={this.handleGraphTypeChange}>1D</OneDTag>
-                <OneWTag type={this.state.type} name="1W" onClick={this.handleGraphTypeChange} >1W</OneWTag>
-                <OneMTag type={this.state.type} name="1M" onClick={this.handleGraphTypeChange} >1M</OneMTag>
-                <ThreeMTag type={this.state.type} name="3M" onClick={this.handleGraphTypeChange} >3M</ThreeMTag>
-                <OneYTag type={this.state.type} name="1Y" onClick={this.handleGraphTypeChange}>1Y</OneYTag>
-                <FiveYTag type={this.state.type} name="5Y" onClick={this.handleGraphTypeChange}>5Y</FiveYTag>
+                <OneDTag type={this.props.type}name="1D" onClick={this.props.handleGraphTypeChange}>1D</OneDTag>
+                <OneWTag type={this.props.type} name="1W" onClick={this.props.handleGraphTypeChange} >1W</OneWTag>
+                <OneMTag type={this.props.type} name="1M" onClick={this.props.handleGraphTypeChange} >1M</OneMTag>
+                <ThreeMTag type={this.props.type} name="3M" onClick={this.props.handleGraphTypeChange} >3M</ThreeMTag>
+                <OneYTag type={this.props.type} name="1Y" onClick={this.props.handleGraphTypeChange}>1Y</OneYTag>
+                <FiveYTag type={this.props.type} name="5Y" onClick={this.props.handleGraphTypeChange}>5Y</FiveYTag>
             </NavType>
             </SectionWrapper>
         )

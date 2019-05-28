@@ -4,36 +4,56 @@ class LineChart extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            data: [{x: 0, y: 30.12}, {x: 1, y: 32.10}, {x: 2, y: 30.09}, {x: 3, y: 30.99}, {x: 4, y: 31.99}, {x: 5, y: 53.99}, {x: 6, y: 40.20}, {x: 7, y: 32.12}, {x: 8, y: 32.10}, {x: 9, y: 31.09}, {x: 10, y: 32.99}, {x: 11, y: 36.99}, {x: 12, y: 54.99}, {x: 13, y: 40.20}]
-        }
+      this.state = {
+      }
+        this.getMinX = this.getMinX.bind(this);
+        this.getMaxX = this.getMaxX.bind(this);
+        this.getMinY = this.getMinY.bind(this);
+        this.getMaxY = this.getMaxY.bind(this);
+        this.getSvgX = this.getSvgX.bind(this);
+        this.getSvgY = this.getSvgY.bind(this);
+
     }
 
 // GET MAX & MIN X
 //x min and max are the first and last values in the data array
   getMinX() {
-    const {data} = this.state;
-    return data[0].x;
+    console.log('stockData', this.props.stockData);
+    const data = this.props.stockData;
+    if (data.length > 0) {
+      return data[0].x;
+    } else {
+      return;
+    }
+
   }
   getMaxX() {
-    const {data} = this.state;
-    return data[data.length - 1].x;
+    const data = this.props.stockData;
+    if (data.length > 0) {
+      return data[data.length - 1].x;
+    } else {
+      return;
+    }
   }
 
 // GET MAX & MIN Y
 //a function that reduces the input data array and returns a minimum y value
   getMinY() {
-    const {data} = this.state;
-    return data.reduce((min, p) => p.y < min ? p.y : min, data[0].y);
-  }
-  //a function that reduces the input data array and returns a maximum y value
-  getMaxY() {
-    const {data} = this.state;
-    return data.reduce((max, p) => p.y > max ? p.y : max, data[0].y);
+    const data = this.props.stockData;
+    if (data.length > 0) {
+      return data.reduce((min, p) => p.y < min ? p.y : min, data[0].y);
+    }
   }
 
-  //if y at max X is +, market = BULL
-  //if y at max X is -, market = BEAR
+  //a function that reduces the input data array and returns a maximum y value
+  getMaxY() {
+    const data = this.props.stockData;
+    if (data.length > 0) {
+    return data.reduce((max, p) => p.y > max ? p.y : max, data[0].y);
+    } else {
+      return;
+    }
+  }
 
   //LINE CHART COORDINATE HELPER FUNCTIONS
 
@@ -46,51 +66,53 @@ class LineChart extends React.Component {
   //a function that creates an y coordinate point
   getSvgY(y) {
     const {svgHeight} = this.props;
-    console.log(svgHeight);
     return svgHeight - (y / this.getMaxY() * svgHeight);
   }
 
   //MAKE PATH
   //a function that creates the svg line graph by generating the html path
   makePath() {
-    const {data} = this.state;
-    const {color} = this.props;
-    console.log(data);
-    let pathD = "M " + this.getSvgX(data[0].x) + " " + this.getSvgY(data[0].y) + " ";
-    pathD += data.map((point) => {
-      return "L " + this.getSvgX(point.x) + " " + this.getSvgY(point.y) + " ";
-    });
-
-        return (
-            <path className="stock_chart_path" d={pathD} style={{stroke: color, strokeWidth: 3, fill: "none"}} />
-        );
-
-    }
-
+    const data = this.props.stockData;
+    if (!data.length) {
+      return;
+    } else {
+      const {color} = this.props;
+      let pathD = `M  ${this.getSvgX(data[0].x)} ${this.getSvgY(data[0].y)} `;
+      pathD += data.map((point) => {
+        return `L ${this.getSvgX(point.x)} ${this.getSvgY(point.y)} `;
+      });
+          return (
+              <path className="stock_chart_path" d={pathD} style={{stroke: color, strokeWidth: 3, fill: "none"}} />
+          );
+      }
+  }
 
     //Create Data Point Line
     makeDottedLine() {
-        const minX = this.getMinX()
+        const minX = this.getMinX();
         const maxX = this.getMaxX();
-        const minY = 0;
-      return (
+        const minY = this.getMinY();
+        return (
           <g className="stock_chart_line">
             <line
-              style={{stroke: "black", strokeWidth: 2, fill: "none", strokeDasharray:"1, 48.286", strokeDashoffset: 0}}
+              style={{stroke: "black", strokeWidth: 1, fill: "none", strokeDasharray:`1, ${676/(this.props.stockData.length)}`, strokeDashoffset: 0}}
               x1={this.getSvgX(minX)} y1={this.getSvgY(minY)}
               x2={this.getSvgX(maxX)} y2={this.getSvgY(minY)} />
           </g>
           );
-        }
+      }
 
     render() {
         const {svgHeight, svgWidth} = this.props;
+        const graph = this.props.stockData.length ? (<svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} width="676" height="196">
+          {this.makePath()}
+          {this.makeDottedLine()}
+        </svg>) : (<div> Graph Currently Unavailable </div>);
         return (
-              <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} width="676" height="196">
-                {this.makePath()}
-                {this.makeDottedLine()}
-              </svg>
-            );
+            <div>
+              {graph}
+            </div>
+        )
     }
 }
 
