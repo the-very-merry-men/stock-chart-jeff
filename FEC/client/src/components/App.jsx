@@ -36,12 +36,9 @@ class App extends React.Component {
             url: `/api/stocks/${this.state.ticker}/prices/${this.state.type}`,
             type: 'GET',
             success: (data) => {
-                let closingCost = data[0].price
                 this.setState({
                     priceData: data,
-                    stockName: data[0].name,
-                    closingPrice: (closingCost + Math.random() * 2).toFixed(2),
-                    currentPrice: data[data.length -1].price
+                    stockName: data[0].name
                 }, () => this.generateStockDataArray())
                 console.log('GET request successful', data);
             },
@@ -93,44 +90,45 @@ class App extends React.Component {
         }else if (mm === 11) {
             month = 'DEC'
         }
+        const data = this.state.priceData.slice();
         if (type === '1D') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                    graphData.push({dateString: `${schedule[i]} ET`, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                    graphData.push({dateString: `${schedule[i]} ET`, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
             })
         } else if (type === '1W') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
             })
         } else if (type === '1M') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
             })
         } else if (type ==='3M') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                graphData.push({dateString: `${schedule[i]}, ${month} ${dd} ET`, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
             })
         } else if (type === '1Y') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                graphData.push({dateString: today, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                graphData.push({dateString: today, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
             })
         } else if (type === '5Y') {
-            for (var i = 0; i < this.state.priceData.length; i++) {
-                graphData.push({dateString: today, x: i, y: this.state.priceData[i].price});
+            for (var i = 0; i < data.length; i++) {
+                graphData.push({dateString: today, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
