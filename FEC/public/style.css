@@ -7,18 +7,3 @@ body {
     font-family: 'dinpro';
     font-size: 12px;
 }
-
-
-.stock-chart {
-    width: 676px;
-    height: 196;
-    padding-bottom: 44px;
-}
-
-
-
-
-
-.stock-type {
-    margin: 0px 12px;
-}
