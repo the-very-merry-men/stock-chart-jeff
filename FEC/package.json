@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Robinhood.com Clone",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch"
   },
@@ -15,11 +16,20 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
+    "chart.js": "^2.8.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-15": "^1.4.0",
+    "enzyme-adapter-react-16": "^1.13.1",
     "express": "^4.15.0",
     "jquery": "^3.4.1",
     "mysql": "^2.13.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "react-svg-line-chart": "^2.0.1",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -31,6 +41,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "jest": "^24.8.0",
+    "supertest": "^4.0.2",
     "webpack": "^2.2.1"
   }
 }
