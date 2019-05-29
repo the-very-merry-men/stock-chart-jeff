@@ -184,7 +184,7 @@ class StockChart extends React.Component {
                     </Change >
                 </PriceHeader>
                 <Spacer></Spacer>
-                <ChartBox className="stock-chart" style={{position: 'relative', width: 676, height: 196}}>
+                <ChartBox style={{position: 'relative', width: 676, height: 196}}>
                     <LineChart stockData={this.props.stockData}/>
                 </ChartBox>
             <NavType className='stock-type-nav'>

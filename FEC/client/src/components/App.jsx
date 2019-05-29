@@ -47,6 +47,7 @@ class App extends React.Component {
             }
         })
     }
+
     //a function that updates the type and data on the state when the graph type is changed
     handleGraphTypeChange(event) {
         event.preventDefault();
