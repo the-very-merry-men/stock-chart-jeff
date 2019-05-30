@@ -5,6 +5,7 @@ import styled from 'styled-components';
 //STYLING
 const OneDTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -15,6 +16,7 @@ const OneDTag = styled.a`
 `;
 const OneWTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -26,6 +28,7 @@ const OneWTag = styled.a`
 
 const OneMTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -36,6 +39,7 @@ const OneMTag = styled.a`
 `;
 const ThreeMTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -47,6 +51,7 @@ const ThreeMTag = styled.a`
 
 const OneYTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -57,6 +62,7 @@ const OneYTag = styled.a`
 `;
 const FiveYTag = styled.a`
    margin: 0px 12px;
+   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -65,8 +71,6 @@ const FiveYTag = styled.a`
    border-bottom: ${props => props.type === '5Y' ? '#21CE99 1px solid' : 'none'};
    color: ${props => props.type === '5Y' ? '#21CE99' : 'black'};
 `;
-
-
 
 const NavType = styled.nav`
    display: flex;
@@ -154,7 +158,8 @@ class StockChart extends React.Component {
 
     componentDidMount() {
         const random = (Math.random());
-        const currentPrice = this.props.stockData[this.props.stockData.length - 1];
+        const currentPrice = 200;
+        //const currentPrice = this.props.stockData[this.props.stockData.length - 1];
         const closing = random < 0.5 ? currentPrice + (Math.random() * 20) : currentPrice - (Math.random() * 5);
         this.setState({
             currentPrice: currentPrice,
@@ -164,11 +169,11 @@ class StockChart extends React.Component {
     render() {
         const color = (this.props.market === 'Bull' ? '#f45531' : '#21CE99');
         const currentVal = `$${this.state.currentPrice}`;
-        const priceDifference = this.state.closingPrice - this.state.currentPrice;
+        const priceDifference = (this.state.closingPrice - this.state.currentPrice).toFixed(2);
         const pricePercentage = (priceDifference/this.state.closingPrice).toFixed(3);
         const sign = priceDifference > 0 ? '+' : '-';
-        const differenceString = `${sign}$${priceDifference}   `;
-        const percentString = `${sign}(${pricePercentage})`
+        const differenceString = priceDifference < 0 ? `${sign}$${Math.abs(priceDifference)}   ` : `${sign}$${priceDifference}   `;
+        const percentString = pricePercentage < 0 ? `${sign}(${Math.abs(pricePercentage)} %)` : `${sign}(${pricePercentage} %)`;
 
 
         return (
