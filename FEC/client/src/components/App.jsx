@@ -7,11 +7,9 @@ class App extends React.Component {
         super(props);
         this.state = {
             priceData:[],
-            currentPrice: 0,
-            stockName: '',
+            stockName: 'Tesla',
             date: new Date(),
             stockData: [],
-            closingCost: 0,
             type: '1D',
             ticker: 'TSLA',
 
@@ -140,7 +138,7 @@ class App extends React.Component {
     render () {
         return (
             <div>
-                <StockChart currentPrice={this.state.currentPrice} stockName={this.state.stockName} stockData={this.state.stockData} market={this.state.market} handleGraphTypeChange={this.handleGraphTypeChange} type={this.state.type}/>
+                <StockChart stockName={this.state.stockName} stockData={this.state.stockData} market={this.state.market} handleGraphTypeChange={this.handleGraphTypeChange} type={this.state.type}/>
             </div>
 
         )

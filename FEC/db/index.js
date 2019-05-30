@@ -32,7 +32,6 @@ const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
     if(type === '3M') {
         rows = 15
     } else if (type === '1Y') {
-        //need 85
         rows = 252;
     } else if (type === '5Y') {
         rows = 400;

@@ -50,7 +50,7 @@ app.get('/api/stocks/:ticker/prices/:type', (req, res) => {
     }
 })
 
-//GET request for stock price data
+//GET request or stock price data
 app.get('/', (req, res) => {
     if (req.params.type === '1D' || req.params.type === '1W' || req.params.type === '1M') {
         db.getOneDayWeekMonthData(req.params.ticker, req.params.type, (err, results) => {
