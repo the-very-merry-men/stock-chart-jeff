@@ -5,7 +5,6 @@ import styled from 'styled-components';
 //STYLING
 const OneDTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -16,7 +15,6 @@ const OneDTag = styled.a`
 `;
 const OneWTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -28,7 +26,6 @@ const OneWTag = styled.a`
 
 const OneMTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -39,7 +36,6 @@ const OneMTag = styled.a`
 `;
 const ThreeMTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -51,7 +47,6 @@ const ThreeMTag = styled.a`
 
 const OneYTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -62,7 +57,6 @@ const OneYTag = styled.a`
 `;
 const FiveYTag = styled.a`
    margin: 0px 12px;
-   position: fixed;
 
    &:hover {
     color: #21CE99;
@@ -159,7 +153,6 @@ class StockChart extends React.Component {
     componentDidMount() {
         const random = (Math.random());
         const currentPrice = 200;
-        //const currentPrice = this.props.stockData[this.props.stockData.length - 1];
         const closing = random < 0.5 ? currentPrice + (Math.random() * 20) : currentPrice - (Math.random() * 5);
         this.setState({
             currentPrice: currentPrice,
