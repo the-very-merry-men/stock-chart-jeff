@@ -1,6 +1,6 @@
 module.exports = {
     host: 'localhost',
     user: 'root',
-    password: 'catherine',
+    password: 'password',
     database: 'robinhood_stock_chart'
   };

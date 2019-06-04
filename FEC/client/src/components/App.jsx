@@ -7,11 +7,11 @@ class App extends React.Component {
         super(props);
         this.state = {
             priceData:[],
-            stockName: 'Tesla',
+            stockName: 'Morissette',
             date: new Date(),
             stockData: [],
             type: '1D',
-            ticker: 'TSLA',
+            ticker: 'PVBR',
 
         }
         this.retrieveData = this.retrieveData.bind(this);
@@ -20,7 +20,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        //retrieve the path and filename of current page
         let pathName = window.location.pathname.match(/\/stocks\/(\w+)/i);
         let ticker = pathName ? pathName[1] : null;
         if (ticker) {
@@ -28,6 +27,22 @@ class App extends React.Component {
         }
     }
 
+    // getFirstStock () {
+    //   $.ajax({
+    //     url: `/api/stocks/${this.state.ticker}/prices/${this.state.type}`,
+    //         type: 'GET',
+    //         success: (data) => {
+    //             this.setState({
+    //                 priceData: data,
+    //                 stockName: data[0].name
+    //             }, () => this.generateStockDataArray())
+    //             console.log('GET request successful', data);
+    //         },
+    //         error: (err) => {
+    //             console.log(err);
+    //         }
+    //     })
+    // }
     //a function that makes an http GET request using the ticker and graph type 
     retrieveData() {
         $.ajax({
@@ -68,31 +83,31 @@ class App extends React.Component {
             month = 'JAN';
         } else if (mm === 1) {
             month = 'FEB';
-        }else if (mm === 2) {
-            month = 'MAR';
-        }else if (mm === 3) {
-            month = 'APR';
-        }else if (mm === 4) {
-            month = 'MAY';
-        }else if (mm === 5) {
-            month = 'JUN';
-        }else if (mm === 6) {
-            month = 'JUL';
-        }else if (mm === 7) {
-            month = 'AUG';
-        }else if (mm === 8) {
-            month = 'SEPT';
-        }else if (mm === 9) {
-            month = 'OCT';
-        }else if (mm === 10) {
-            month = 'NOV';
-        }else if (mm === 11) {
+        } else if (mm === 2) {
+             month = 'MAR';
+        } else if (mm === 3) {
+             month = 'APR';
+        } else if (mm === 4) {
+             month = 'MAY';
+        } else if (mm === 5) {
+             month = 'JUN';
+        } else if (mm === 6) {
+             month = 'JUL';
+        } else if (mm === 7) {
+             month = 'AUG';
+        } else if (mm === 8) {
+             month = 'SEPT';
+        } else if (mm === 9) {
+             month = 'OCT';
+        } else if (mm === 10) {
+             month = 'NOV';
+        } else if (mm === 11) {
             month = 'DEC'
         }
         const data = this.state.priceData.slice();
         if (type === '1D') {
             for (var i = 0; i < data.length; i++) {
-                    graphData.push({dateString: `${schedule[i]} ET`, x: i, y: data[i].price});
+                graphData.push({dateString: `${schedule[i]} ET`, x: i, y: data[i].price});
             }
             this.setState({
                 stockData: graphData
