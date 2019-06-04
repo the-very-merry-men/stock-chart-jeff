@@ -14,12 +14,8 @@ const connectRobinhood = mysql.createConnection({
 connectRobinhood.connect((err) => {
   if (err) throw err;
   console.log('Connected!');
-  // eslint-disable-next-line no-use-before-define
-  // schema();
-  // eslint-disable-next-line no-use-before-define
-  // fillStocks();
-  // eslint-disable-next-line no-use-before-define
-  // thirtyMinutePriceDataForOneMonth();
+  fillStocks();
+  thirtyMinutePriceDataForOneMonth();
   oneDayDataFor5Years();
 });
 
@@ -82,9 +78,3 @@ var oneDayDataFor5Years = () => {
     }
 
 };
-
-
-// module.exports = {
-//   fillListingTable,
-//   fillBookingTable,
-// };
