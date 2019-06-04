@@ -11,7 +11,7 @@ STOCK NAME AND TICKER
 
 STOCK DATA FOR ONE DAY, ONE WEEK, ONE MONTH, ONE YEAR, 5 YEARS
 
-| First Header  | Second Header | First Header  | Second Header | First Header  |
+| API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | /api/stocks/:ticker/prices/:type  | GET  | ticker id for a certain stock at a certain time increment  | stock prices STATUS CODE 200 | Get the stock prices for a given stock  |
 | /api/stocks/:ticker/prices/:type  | POST  | ticker id for a certain stock plus a new value to add to a database  | STATUS CODE 201  | Add a new price for a given stock  | 
