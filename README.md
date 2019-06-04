@@ -1,6 +1,6 @@
-                        ### CreateReadUpdateDelete OPERATIONS for Stock Chart System Design
+                        CreateReadUpdateDelete OPERATIONS for Stock Chart System Design
 
-> STOCK NAME AND TICKER
+> ### STOCK NAME AND TICKER
 
 | API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
@@ -9,7 +9,7 @@
 | /api/stocks/:stock | PUT  | a given name or ticker id to be updated with input values  | STATUS CODE 200  | Update a current stock inside the database  |
 | /api/stocks/:stock | DELETE  | a given name, or stock id  | STATUS CODE 200  | Delete a stock from a user input name or ticker_id  |
 
-> STOCK DATA FOR ONE DAY, ONE WEEK, ONE MONTH, ONE YEAR, 5 YEARS
+> ### STOCK DATA FOR ONE DAY, ONE WEEK, ONE MONTH, ONE YEAR, 5 YEARS
 
 | API Endpoints  | Request Type | Input | Output | Description  |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
