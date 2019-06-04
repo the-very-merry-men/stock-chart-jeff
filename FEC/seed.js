@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const faker = require('faker');
 const Math = require('mathjs');
 const random = require('math-random');
+const fs = require('fs');
 
 const connectRobinhood = mysql.createConnection({
   host: 'localhost',
@@ -15,8 +16,9 @@ connectRobinhood.connect((err) => {
   if (err) throw err;
   console.log('Connected!');
   fillStocks();
-  thirtyMinutePriceDataForOneMonth();
-  oneDayDataFor5Years();
+  // thirtyMinutePriceDataForOneMonth();
+  // oneDayDataFor5Years();
+  //$.csv.toObjects(csv)
 });
 
 const makeId = (length) => {
@@ -36,15 +38,22 @@ const fillStocks = () => {
     let queryName = newCompanyName[0];
     const stockLettering = makeId(4);
     const listingSql = `INSERT INTO stock_info (id, stock_name, stock_ticker) VALUES ('${i}', '${queryName}', '${stockLettering}');`;
-    connectRobinhood.query(listingSql, (err, result) => {
+    // connectRobinhood.query(listingSql, (err, result) => {
+    //   if (err) throw err;
+    //   console.log('record inserted first table');
+    // });
+    const writeObj = '\n' + i + ',' + queryName + ',' + stockLettering;
+    const path = __dirname + '/' + 'seed.csv';
+    console.log(__dirname);
+    fs.appendFile(path, writeObj, 'utf8', (err) => {
       if (err) throw err;
-      console.log('record inserted first table');
+      console.log('The file has been saved!');
     });
-    console.log(i);
   }
 };
 
-var thirtyMinutePriceDataForOneMonth = () => {
+
+const thirtyMinutePriceDataForOneMonth = () => {
     var count = 0;
     for (var i = 1; i < 101; i++) {
         var number = (random() * 100);
@@ -61,7 +70,7 @@ var thirtyMinutePriceDataForOneMonth = () => {
     }
 };
 
-var oneDayDataFor5Years = () => {
+const oneDayDataFor5Years = () => {
     var count = 0;
     for (var i = 1; i < 101; i++) {
         var number = (Math.random() * 100);
