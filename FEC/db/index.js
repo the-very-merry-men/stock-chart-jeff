@@ -7,11 +7,11 @@ var connection = mysql.createConnection(mysqlConfig);
 const getOneDayWeekMonthData = (ticker, type, callback) => {
     var rows = 0;
     if(type === '1D') {
-        rows = 33;
+        rows = 3;
     } else if (type === '1W') {
-        rows = 66;
+        rows = 4;
     } else if (type === '1M') {
-        rows = 100;
+        rows = 5;
     }
     var query = `SELECT stock_price_for_thirty_minutes AS price, stock_name AS name FROM stock_info
     INNER JOIN stock_price_history_one_month
@@ -30,11 +30,11 @@ const getOneDayWeekMonthData = (ticker, type, callback) => {
 const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
     var rows = 0;
     if(type === '3M') {
-        rows = 33;
+        rows = 2;
     } else if (type === '1Y') {
-        rows = 66;
+        rows = 4;
     } else if (type === '5Y') {
-        rows = 100;
+        rows = 5;
     }
     var query = `SELECT stock_price_for_one_day AS price, stock_name AS name FROM stock_info
     INNER JOIN stock_price_history_five_years
