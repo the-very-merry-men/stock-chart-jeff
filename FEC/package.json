@@ -24,6 +24,7 @@
     "express": "^4.15.0",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
+    "json2csv": "^4.5.1",
     "math-random": "^1.0.4",
     "mathjs": "^5.10.3",
     "mysql": "^2.13.0",

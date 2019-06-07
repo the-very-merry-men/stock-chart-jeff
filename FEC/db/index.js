@@ -30,7 +30,7 @@ const getOneDayWeekMonthData = (ticker, type, callback) => {
 const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
     var rows = 0;
     if(type === '3M') {
-        rows = 2;
+        rows = 3;
     } else if (type === '1Y') {
         rows = 4;
     } else if (type === '5Y') {

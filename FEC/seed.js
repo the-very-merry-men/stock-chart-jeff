@@ -17,9 +17,10 @@ const connectRobinhood = mysql.createConnection({
 connectRobinhood.connect((err) => {
   if (err) throw err;
   console.log('Connected!');
-  fillStocks();
-  thirtyMinutePriceDataForOneMonth();
-  oneDayDataFor5Years();
+  // fillStocks();
+
+  // ran below function 6 times to fill postgres database
+  fillTables();
 });
 
 const makeId = (length) => {
@@ -44,37 +45,21 @@ const fillStocks = () => {
   console.log('done');
 };
 
-
-const thirtyMinutePriceDataForOneMonth = () => {
-  let count = 0;
-  writer.pipe(fs.createWriteStream('seedTable1.csv'));
-  for (let i = 0; i < 10000000; i++) {
-    let number = (random() * 100);
-    for (let j = 1; j <= 5; j++) {
-      count++;
-      let price = random < 0.5 ? (number + (random() * 5)) : (number - (random() * 5));
-      let newPrice = price.toFixed(2);
-      writer.write({count, i, newPrice});
-    }
-  }
-  console.log('done');
-};
-
-const oneDayDataFor5Years = () => {
-  let count = 0;
-  writer.pipe(fs.createWriteStream('seedTable2.csv'));
-  for (var i = 1; i < 10000000; i++) {
+const fillTables = () => {
+  let id_ = 0;
+  let currentWrite = 1;
+  writer.pipe(fs.createWriteStream(`seedTable${currentWrite}.csv`));
+  for (let i = 1; i < 10000000; i++) {
     var number = (Math.random() * 100);
     for (j = 1; j <= 5; j++) {
-      count++;
-      var random = (Math.random());
-      var price = random < 0.5 ? number + (Math.random() * 5) : number - (Math.random() * 5);
-      const newPrice = price.toFixed(2);
-      writer.write({count, i, newPrice});
+      id_++;
+      let random = (Math.random());
+      let firstPrice = random < 0.5 ? number + (Math.random() * 5) : number - (Math.random() * 5);
+      let newPrice = firstPrice.toFixed(2);
+      let price = newPrice;
+      let stock_id = i;
+      writer.write({id_, stock_id, price});
     }
   }
   console.log('done');
 };
-
-
-
