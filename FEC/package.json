@@ -14,6 +14,7 @@
     "node": ">=6.13.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.5",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.8.0",
@@ -25,6 +26,7 @@
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
     "json2csv": "^4.5.1",
+    "jsonfile": "^5.0.0",
     "math-random": "^1.0.4",
     "mathjs": "^5.10.3",
     "mysql": "^2.13.0",
