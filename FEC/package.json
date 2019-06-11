@@ -8,7 +8,7 @@
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch"
   },
-  "author": "Catherine OKane",
+  "author": "Jeff Day",
   "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
@@ -29,7 +29,9 @@
     "jsonfile": "^5.0.0",
     "math-random": "^1.0.4",
     "mathjs": "^5.10.3",
+    "mongoose": "^5.5.14",
     "mysql": "^2.13.0",
+    "pg-promise": "^8.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",

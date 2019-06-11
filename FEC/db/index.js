@@ -1,55 +1,35 @@
-var mysql = require('mysql');
-var mysqlConfig = require('./config.js');
+const mongoose = require('mongoose');
+const mongoURI = 'mongodb://localhost:27017/STOCK_DATA';
+const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
 
-var connection = mysql.createConnection(mysqlConfig);
+db
+  .then(db => console.log(`Connected to: ${mongoURI}`))
+  .catch(err => {
+    console.log(`There was a problem connecting to mongo at: ${mongoURI}`)
+    console.log(err);
+  });
 
-//a model function that retrieves the stock price data for a specific stock for the 1 Day, 1 Week, and 1 Month graph types
-const getOneDayWeekMonthData = (ticker, type, callback) => {
-    var rows = 0;
-    if(type === '1D') {
-        rows = 3;
-    } else if (type === '1W') {
-        rows = 4;
-    } else if (type === '1M') {
-        rows = 5;
-    }
-    var query = `SELECT stock_price_for_thirty_minutes AS price, stock_name AS name FROM stock_info
-    INNER JOIN stock_price_history_one_month
-    ON stock_price_history_one_month.stock_id = stock_info.id
-    WHERE stock_info.stock_ticker = "${ticker}" LIMIT ${rows}`;
-    connection.query(query, (err, results) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, results);
-        }
+const stockSchema = new mongoose.Schema({
+  id: Number,
+  stock_name: String,
+  stock_ticker: String,
+  oneDay: [Number], 
+  oneWeek: [Number], 
+  oneMonth: [Number],
+  threeMonth: [Number],
+  oneYear: [Number],
+  fiveYear: [Number],
+});
+
+const Stock = mongoose.model('Stock', stockSchema);
+
+const fetch = (id, callback) => {
+  Stock.find( { id } )
+    .then((data) => {
+      console.log(data);
+      callback(null, data);
     })
-};
-
-//a function that retrieves the stock price data for a specific stock for the 3 Month, 1 Year, and 5 Years graph types
-const getThreeMonthOneYearFiveYearData = (ticker, type, callback) => {
-    var rows = 0;
-    if(type === '3M') {
-        rows = 3;
-    } else if (type === '1Y') {
-        rows = 4;
-    } else if (type === '5Y') {
-        rows = 5;
-    }
-    var query = `SELECT stock_price_for_one_day AS price, stock_name AS name FROM stock_info
-    INNER JOIN stock_price_history_five_years
-    ON stock_price_history_five_years.stock_id = stock_info.id
-    WHERE stock_info.stock_ticker = "${ticker}" LIMIT ${rows}`;
-    connection.query(query, (err, results) => {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, results);
-        }
-    })
-
+    .catch((err) => console.log(err));
 }
-
-module.exports.getOneDayWeekMonthData = getOneDayWeekMonthData;
-module.exports.getThreeMonthOneYearFiveYearData = getThreeMonthOneYearFiveYearData;
-
+module.exports.fetch = fetch;
+module.exports.db = db;

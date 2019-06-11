@@ -74,7 +74,6 @@ const NavType = styled.nav`
    height: 33px;
    font-size: 13px;
    font-weight:400;
-   line-spacing: 0.25px;
    border-bottom: 1px solid #f4f4f5;
    `;
 
@@ -143,31 +142,22 @@ class StockChart extends React.Component {
         super(props);
 
         this.state = {
-            currentPrice: 200.00,
-            closingPrice: 210.00,
-            amountDiff: 2.00,
-            percentDiff: 0.012,
+            currentPrice: '',
+            closingPrice: '',
+            amountDiff: '',
+            percentDiff: '',
         }
     }
 
-    componentDidMount() {
-        const random = (Math.random());
-        const currentPrice = 200;
-        const closing = random < 0.5 ? currentPrice + (Math.random() * 20) : currentPrice - (Math.random() * 5);
-        this.setState({
-            currentPrice: currentPrice,
-            closingPrice: closing
-        })
-    }
     render() {
-        const color = (this.props.market === 'Bull' ? '#f45531' : '#21CE99');
-        const currentVal = `$${this.state.currentPrice}`;
-        const priceDifference = (this.state.closingPrice - this.state.currentPrice).toFixed(2);
-        const pricePercentage = (priceDifference/this.state.closingPrice).toFixed(3);
+        const currentPrice = this.props.currentPrice;
+        const closingPrice = this.props.closingPrice;
+        const currentVal = currentPrice ? `$${currentPrice}` : 'Not Available';
+        const priceDifference = (currentPrice - closingPrice).toFixed(2);
+        const pricePercentage = (priceDifference/closingPrice).toFixed(3);
         const sign = priceDifference > 0 ? '+' : '-';
         const differenceString = priceDifference < 0 ? `${sign}$${Math.abs(priceDifference)}   ` : `${sign}$${priceDifference}   `;
         const percentString = pricePercentage <= 0 ? `(${Math.abs(pricePercentage)} %)` : `(${pricePercentage} %)`;
-
 
         return (
             <SectionWrapper className='stock-chart-container'>
@@ -183,19 +173,20 @@ class StockChart extends React.Component {
                 </PriceHeader>
                 <Spacer></Spacer>
                 <ChartBox style={{position: 'relative', width: 676, height: 196}}>
-                    <LineChart stockData={this.props.stockData}/>
+                    <LineChart stockData={this.props.stockData} color={this.props.color}/>
                 </ChartBox>
             <NavType className='stock-type-nav'>
-                <OneDTag type={this.props.type}name="1D" onClick={this.props.handleGraphTypeChange}>1D</OneDTag>
-                <OneWTag type={this.props.type} name="1W" onClick={this.props.handleGraphTypeChange} >1W</OneWTag>
-                <OneMTag type={this.props.type} name="1M" onClick={this.props.handleGraphTypeChange} >1M</OneMTag>
-                <ThreeMTag type={this.props.type} name="3M" onClick={this.props.handleGraphTypeChange} >3M</ThreeMTag>
-                <OneYTag type={this.props.type} name="1Y" onClick={this.props.handleGraphTypeChange}>1Y</OneYTag>
-                <FiveYTag type={this.props.type} name="5Y" onClick={this.props.handleGraphTypeChange}>5Y</FiveYTag>
+                <OneDTag type={this.props.type}name="1D" onClick={this.props.handleGraphTypeChange} color={this.props.color}>1D</OneDTag>
+                <OneWTag type={this.props.type} name="1W" onClick={this.props.handleGraphTypeChange} color={this.props.color}>1W</OneWTag>
+                <OneMTag type={this.props.type} name="1M" onClick={this.props.handleGraphTypeChange} color={this.props.color}>1M</OneMTag>
+                <ThreeMTag type={this.props.type} name="3M" onClick={this.props.handleGraphTypeChange} color={this.props.color}>3M</ThreeMTag>
+                <OneYTag type={this.props.type} name="1Y" onClick={this.props.handleGraphTypeChange} color={this.props.color}>1Y</OneYTag>
+                <FiveYTag type={this.props.type} name="5Y" onClick={this.props.handleGraphTypeChange} color={this.props.color}>5Y</FiveYTag>
             </NavType>
             </SectionWrapper>
         )
     }
 }
+
 
 export default StockChart;

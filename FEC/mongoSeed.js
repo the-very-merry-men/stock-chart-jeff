@@ -14,7 +14,7 @@ const makeId = (length) => {
 
 const arrGenerator = () => {
   let newArr = [];
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 20; i++) {
     let arrItem = (Math.random() * 80).toFixed(2)
     newArr.push(Number(arrItem));
   }
