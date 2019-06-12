@@ -3,6 +3,7 @@ import LineChart from './LineChart.jsx';
 import styled from 'styled-components';
 
 //STYLING
+
 const OneDTag = styled.a`
    margin: 0px 12px;
 
@@ -80,6 +81,8 @@ const NavType = styled.nav`
 const SectionWrapper = styled.section`
    width: 676px;
    height: 349px;
+   margin-left: 100px;
+   margin-top: 100px;
 `;
 
 const ChartBox = styled.div`

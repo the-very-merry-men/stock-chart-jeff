@@ -31,6 +31,7 @@
     "mathjs": "^5.10.3",
     "mongoose": "^5.5.14",
     "mysql": "^2.13.0",
+    "newrelic": "^5.10.0",
     "pg-promise": "^8.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
