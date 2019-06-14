@@ -2,11 +2,11 @@ config:
   target: 'http://localhost:3001'
   phases:
     - duration: 60
-      arrivalRate: 40
-    - duration: 120
       arrivalRate: 100
-    - duration: 600
-      arrivalRate: 50
+    - duration: 120
+      arrivalRate: 300
+    - duration: 60
+      arrivalRate: 500
  
 scenarios:
   - name: 'Stock increment search'

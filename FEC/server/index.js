@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../db/index.js');
 
-
 const app = express();
 
 var port = 3001;

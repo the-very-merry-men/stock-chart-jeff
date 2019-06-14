@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
 const mongoURI = 'mongodb://localhost:27017/STOCK_DATA';
 const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
-db
-  .then(db => console.log(`Connected to: ${mongoURI}`))
-  .catch(err => {
-    console.log(`There was a problem connecting to mongo at: ${mongoURI}`)
-    console.log(err);
-  });
+
+// const mongoURI = 'mongodb://localhost:27017/STOCK_DATA';
+// Use connect method to connect to the Server passing in
+// additional options
+MongoClient.connect(mongoURI, {
+  poolSize: 1000
+}, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected correctly to server");
+  db.close();
+});
 
 const stockSchema = new mongoose.Schema({
   id: Number,
