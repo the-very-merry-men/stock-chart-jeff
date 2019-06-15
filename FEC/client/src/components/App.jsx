@@ -75,7 +75,7 @@ class App extends React.Component {
                 }, () => this.generateStockDataArray(), console.log('GET request successful', this.state.priceData));
             },
             error: (err) => {
-                console.log('here', err);
+                console.log('error here', err);
             }
         })
     }

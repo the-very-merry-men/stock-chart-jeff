@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "start": "pm2 start server/index.js",
+    "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch"
   },
   "author": "Jeff Day",
@@ -41,6 +41,7 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-svg-line-chart": "^2.0.1",
+    "redis": "^2.8.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
